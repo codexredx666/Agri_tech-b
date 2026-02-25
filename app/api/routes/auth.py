@@ -6,6 +6,8 @@ from app.models.user import User
 from app.schemas.auth_schema import UserRegister, UserLogin, TokenResponse
 from app.core.security import hash_password, verify_password, create_access_token, get_current_user
 
+router = APIRouter(prefix="/auth", tags=["Auth"])
+
 
 @router.get("/profile")
 def get_profile(current_user = Depends(get_current_user)):
@@ -17,9 +19,6 @@ def get_profile(current_user = Depends(get_current_user)):
         "phone": current_user.phone,
         "verified": current_user.verified,
     }
-
-
-router = APIRouter(prefix="/auth", tags=["Auth"])
 
 
 def get_db():
